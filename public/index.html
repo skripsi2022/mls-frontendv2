@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <title>MLS - Dashboard </title> -->
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+
+    <!-- page css -->
+    <link href="assets/vendors/apexcharts/dist/apexcharts.css" rel="stylesheet">
+    <link href="assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- Core css -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+    
+    <!-- Core Vendors JS -->
+    <script src="assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <script src="assets/vendors/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+    <!-- page js -->
+    <script src="assets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+            $('.data-table').DataTable({
+                'columnDefs': [
+                    { 'orderable': false, 'targets': 0 }
+                ]
+            });
+        </script>
+    <!-- Core JS -->
+    <script src="assets/js/app.min.js"></script>
+
+</body>
+
 </html>
