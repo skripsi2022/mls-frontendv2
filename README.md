@@ -1,24 +1,13 @@
-# mls-frontend_v2
+# FrontEnd Project Web Admin - Skripsi 2022
 
-## Project setup
+## Profile
 ```
-npm install
-```
+Nama : A. Yahya Hudan Permana
+Kelas : TI-4C
 
-### Compiles and hot-reloads for development
+```
+Bismillah Lancar hehe :)
+
+## Running This Project
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
