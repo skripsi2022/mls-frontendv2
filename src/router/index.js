@@ -26,6 +26,11 @@ import NilaiView from '../views/Dashboard/Nilai/IndexView.vue'
 import NilaiCreateView from '../views/Dashboard/Nilai/CreateView.vue'
 import NilaiDetailView from '../views/Dashboard/Nilai/DetailView.vue'
 
+// GURU AREA =================================================
+import MapelGuruView from '../views/Guru/Mapel/IndexView.vue'
+
+
+
 const routes = [
   {
     path: '/',
@@ -244,6 +249,16 @@ const routes = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   // }
+
+   // GURU AREA ACCESS =========================================
+   {
+     path: '/guru/mapel',
+      name: 'guru.mapel.index',
+      component: MapelGuruView,
+      meta:{
+        title : "Mata Pelajaran | Learning System Cloud Based",
+      },
+   }
 ]
 
 const router = createRouter({

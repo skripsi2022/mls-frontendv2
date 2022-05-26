@@ -61,7 +61,6 @@ export default {
                 //remove localStorage
                 localStorage.removeItem("loggedIn")    
 
-
                 //redirect
                 return this.$router.push({ name: 'auth.index' })
             })
@@ -73,6 +72,8 @@ export default {
         if(!this.loggedIn) {
             return this.$router.push({ name: 'auth.index' })
         }
+        
+        
     }
 }
 </script>

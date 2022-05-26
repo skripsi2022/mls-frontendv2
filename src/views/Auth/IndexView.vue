@@ -112,6 +112,8 @@
                                 console.log(res)
 
                                 if (res.data.success) {
+                                    //set localStorage User
+                                    localStorage.setItem('user', JSON.stringify(res.data.user))
 
                                     //set localStorage
                                     localStorage.setItem("loggedIn", "true")
@@ -119,11 +121,26 @@
                                     //set localStorage Token
                                     localStorage.setItem("token", res.data.token)
 
+                                    //set localStorage ID
+                                    localStorage.setItem("id", res.data.user.id)
+
+                                    //set localStorage Role
+                                    localStorage.setItem("role", res.data.role)
+                                    
+            
+
                                     //change state
                                     this.loggedIn = true
 
-                                    //redirect dashboard
-                                    return this.$router.push({ name: 'dashboard.index' })
+                                    let loginType = res.data.user.role
+                                    
+                                    if(loginType === 'Guru'){
+                                        //redirect dashboard
+                                        return this.$router.push({ name: 'dashboard.index' })
+                                    } else if(loginType === 'Admin'){
+                                        //redirect dashboard
+                                        return this.$router.push({ name: 'dashboard.index' })
+                                    }
 
                                 } else {
                                     //set state login failed
