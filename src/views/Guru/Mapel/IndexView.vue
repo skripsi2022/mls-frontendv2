@@ -115,7 +115,11 @@ export default {
         onMounted(() => {
             //get mapel by guru
             
+<<<<<<< HEAD
             axios.get('/api/mapelGuru',{
+=======
+            axios.get('http://localhost:8000/api/mapelGuru',{
+>>>>>>> d56f8ff439cf6d4b88a01e6c1b6f59235b03f5c4
                 params: {
                     id: localStorage.getItem('id')
                 }
@@ -129,7 +133,11 @@ export default {
 
         function destroy(id,index){
             axios.delete(
+<<<<<<< HEAD
                 `/api/mapel/${id}`
+=======
+                `http://localhost:8000/api/mapel/${id}`
+>>>>>>> d56f8ff439cf6d4b88a01e6c1b6f59235b03f5c4
             )
             .then(() => {
                 mapel.value.data.splice(index,1)
