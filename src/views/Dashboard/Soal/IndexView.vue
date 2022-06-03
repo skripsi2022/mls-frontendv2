@@ -8,7 +8,7 @@
                                 <div class="breadcrumb">
                                 <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
                                 <div class="breadcrumb-item">Home</div>
-                                <div class="breadcrumb-item">Mapel</div>
+                                <div class="breadcrumb-item">Ujian</div>
                                 <div class="breadcrumb-item">Detail</div>
                                 </div>                         
                             </div>
@@ -147,13 +147,13 @@
                                                                 {{Validation.opsi_benar[0]}}
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <!-- <div class="col-md-6">
                                                             <label for="" class="form-label">Ujian ID</label>
-                                                            <input type="text" class="form-control" v-model="addsoal.ujian_id" >
+                                                            <input type="text" class="form-control" v-model="addsoal.ujian_id">
                                                             <div v-if="Validation.ujian_id" class="text-danger">
                                                                 {{Validation.ujian_id[0]}}
                                                             </div>
-                                                        </div>                                                          
+                                                        </div>                                                           -->
                                                         <div class="col-12">
                                                             <button class="btn btn-primary" type="submit" >Tambah</button>
                                                         </div>
@@ -179,6 +179,7 @@ import { useRoute, useRouter} from 'vue-router'
 import axios from 'axios'
 
 export default {
+
     setup(){
         //data binding
         const ujian = reactive({
@@ -204,7 +205,7 @@ export default {
         const route = useRoute();
 
         onMounted(() => {
-            axios.get(`http://localhost:8000/api/ujian/${route.params.id}`)
+            axios.get(`/api/ujian/${route.params.id}`)
             .then((result) => {
                 ujian.id_ujian = result.data.data.id_ujian
                 ujian.nama_ujian = result.data.data.nama_ujian
@@ -219,7 +220,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('http://localhost:8000/api/mapel')
+            axios.get('/api/mapel')
             .then((result) => {
                 mapel.value = result.data
             }).catch((err) => {
@@ -231,7 +232,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get(`http://localhost:8000/api/getsoal/${route.params.id}`)
+            axios.get(`/api/getSoalByUjian/${route.params.id}`)
             .then((result) => {
                 soal.value = result.data
             }).catch((err) => {
@@ -243,7 +244,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('http://localhost:8000/api/kelas')
+            axios.get('/api/kelas')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {
@@ -253,7 +254,7 @@ export default {
 
         function store() {
             axios.post(
-                'http://localhost:8000/api/soal',
+                '/api/soal',
                 addsoal
             )
              .then(() => {
@@ -268,7 +269,7 @@ export default {
 
         function update() {
             axios.put(
-                `http://localhost:8000/api/ujian/${route.params.id}`,
+                `/api/ujian/${route.params.id}`,
                 ujian
             )
              .then(() => {
@@ -282,7 +283,7 @@ export default {
 
         function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/soal/${id}`
+                `/api/soal/${id}`
             )
             .then(() => {
                 soal.value.data.splice(index,1)

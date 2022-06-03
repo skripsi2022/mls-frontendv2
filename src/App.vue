@@ -9,7 +9,6 @@
             <!-- Header START -->
             <Header v-if="loggedIn" />
             <!-- Header END -->
-
             <!-- Side Nav START -->
             <Sidebar v-if="loggedIn" />
             <!-- Side Nav END -->
@@ -103,6 +102,7 @@ import Sidebar from "./components/SidebarLayout.vue";
 
     data() {
       return {
+        user: null,
         loggedIn: null
       }
     },

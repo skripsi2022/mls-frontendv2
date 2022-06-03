@@ -124,7 +124,7 @@ export default {
         const route = useRoute();
 
          onMounted(() => {
-            axios.get(`http://localhost:8000/api/ujian/${route.params.id}`)
+            axios.get(`api/ujian/${route.params.id}`)
             .then((result) => {
                 ujian.id_ujian = result.data.data.id_ujian
             }).catch((err) => {
@@ -134,7 +134,7 @@ export default {
 
         function store() {
             axios.post(
-                'http://localhost:8000/api/soal',
+                '/api/soal',
                 soal
             )
              .then(() => {

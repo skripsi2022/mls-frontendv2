@@ -85,7 +85,7 @@ export default {
     },
 
     created() {
-        axios.get('http://localhost:8000/api/user', {headers: {'Authorization': 'Bearer '+this.token}})
+        axios.get('/api/user', {headers: {'Authorization': 'Bearer '+this.token}})
         .then(response => {
             console.log(response)
             this.user = response.data // assign response to state user
@@ -94,11 +94,10 @@ export default {
 
     methods: {
         logout() {
-            axios.get('http://localhost:8000/api/logout')
+            axios.get('/api/logout')
             .then(() => {
                 //remove localStorage
-                localStorage.removeItem("loggedIn")    
-
+                localStorage.clear(); 
 
                 //redirect
                 return this.$router.push({ name: 'auth.index' })

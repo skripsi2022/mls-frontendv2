@@ -104,7 +104,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('http://localhost:8000/api/mapel')
+            axios.get('/api/mapel')
             .then((result) => {
                 mapel.value = result.data
             }).catch((err) => {
@@ -114,7 +114,7 @@ export default {
 
         function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/mapel/${id}`
+                `/api/mapel/${id}`
             )
             .then(() => {
                 mapel.value.data.splice(index,1)

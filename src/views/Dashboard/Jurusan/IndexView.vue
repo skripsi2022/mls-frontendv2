@@ -133,7 +133,7 @@ export default {
 
         onMounted(() => {
             //get jurusan from api
-            axios.get('http://localhost:8000/api/jurusan')
+            axios.get('/api/jurusan')
             .then((result) => {
                 jurusan.value = result.data
             }).catch((err) => {
@@ -145,7 +145,7 @@ export default {
 
         onMounted(() => {
             //get kelas from api
-            axios.get('http://localhost:8000/api/kelas/')
+            axios.get('/api/kelas/')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {
@@ -155,7 +155,7 @@ export default {
 
         function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/jurusan/${id}`
+                `/api/jurusan/${id}`
             )
             .then(() => {
                 jurusan.value.data.splice(index,1)
@@ -166,7 +166,7 @@ export default {
 
         function destroyKelas(id,index){
             axios.delete(
-                `http://localhost:8000/api/kelas/${id}`
+                `/api/kelas/${id}`
             )
             .then(() => {
                 kelas.value.data.splice(index,1)

@@ -93,7 +93,7 @@ export default {
         const route = useRoute();
 
         onMounted(() => {
-            axios.get(`http://localhost:8000/api/siswa/${route.params.id}`)
+            axios.get(`/api/siswa/${route.params.id}`)
             .then((result) => {
                 siswa.nama_siswa = result.data.data.nama_siswa,
                 siswa.nis_siswa = result.data.data.nis_siswa,
@@ -108,7 +108,7 @@ export default {
 
         onMounted(() => {
             //get kelas from api
-            axios.get('http://localhost:8000/api/kelas')
+            axios.get('/api/kelas')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {
@@ -118,7 +118,7 @@ export default {
 
         function update() {
             axios.put(
-                `http://localhost:8000/api/siswa/${route.params.id}`,
+                `/api/siswa/${route.params.id}`,
                 siswa
             )
              .then(() => {

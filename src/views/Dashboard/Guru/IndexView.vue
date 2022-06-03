@@ -91,7 +91,7 @@ export default {
 
         onMounted(() => {
             //get guru from api
-            axios.get('http://localhost:8000/api/guru')
+            axios.get('/api/guru')
             .then((result) => {
                 guru.value = result.data
             }).catch((err) => {
@@ -101,7 +101,7 @@ export default {
 
          function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/guru/${id}`
+                `/api/guru/${id}`
             )
             .then(() => {
                 guru.value.data.splice(index,1)

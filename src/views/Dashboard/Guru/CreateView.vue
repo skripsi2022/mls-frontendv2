@@ -91,7 +91,7 @@ export default {
 
         function store() {
             axios.post(
-                'http://localhost:8000/api/guru',
+                '/api/guru',
                 guru
             )
              .then(() => {

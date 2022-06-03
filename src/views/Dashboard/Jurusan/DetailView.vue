@@ -71,7 +71,7 @@ export default {
         const route = useRoute();
 
         onMounted(() => {
-            axios.get(`http://localhost:8000/api/jurusan/${route.params.id}`)
+            axios.get(`/api/jurusan/${route.params.id}`)
             .then((result) => {
                 jurusan.nama_jurusan = result.data.data.nama_jurusan
             }).catch((err) => {
@@ -81,7 +81,7 @@ export default {
 
         function update() {
             axios.put(
-                `http://localhost:8000/api/jurusan/${route.params.id}`,
+                `/api/jurusan/${route.params.id}`,
                 jurusan
             )
              .then(() => {

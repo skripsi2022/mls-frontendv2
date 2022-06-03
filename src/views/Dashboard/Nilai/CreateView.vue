@@ -97,7 +97,7 @@ export default {
 
         function store() {
             axios.post(
-                'http://localhost:8000/api/siswa',
+                '/api/siswa',
                 siswa
             )
              .then(() => {
@@ -113,7 +113,7 @@ export default {
 
         onMounted(() => {
             //get siswa from api
-            axios.get('http://localhost:8000/api/kelas')
+            axios.get('/api/kelas')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {

@@ -87,7 +87,7 @@ export default {
         const route = useRoute();
 
         onMounted(() => {
-            axios.get(`http://localhost:8000/api/ujian/${route.params.id}`)
+            axios.get(`/api/ujian/${route.params.id}`)
             .then((result) => {
                 ujian.nama_ujian = result.data.data.nama_ujian
                 ujian.mapel_id = result.data.data.mapel_id
@@ -101,7 +101,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('http://localhost:8000/api/mapel')
+            axios.get('/api/mapel')
             .then((result) => {
                 mapel.value = result.data
             }).catch((err) => {
@@ -113,7 +113,7 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('http://localhost:8000/api/kelas')
+            axios.get('/api/kelas')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {
@@ -124,7 +124,7 @@ export default {
 
         function update() {
             axios.put(
-                `http://localhost:8000/api/ujian/${route.params.id}`,
+                `/api/ujian/${route.params.id}`,
                 ujian
             )
              .then(() => {

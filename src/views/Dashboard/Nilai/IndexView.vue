@@ -53,7 +53,7 @@
                                     <tbody>
                                         <tr v-for="(datasiswa, index) in datasiswa.data" :key="index">
                                             <td>{{datasiswa.siswa.nama_siswa}}</td>
-                                            <td>{{datasiswa.nama_mapel}}</td>
+                                            <td>{{datasiswa.ujian.nama_ujian}}</td>
                                             <td>{{datasiswa.nilai}}</td>
                                             <!-- <td>
                                                 <router-link :to="{name: 'siswa.detail',params:{id:siswa.id_siswa}}" class="btn btn-info btn-sm">Detail</router-link>
@@ -88,7 +88,7 @@ export default {
 
             onMounted(() => {
                 //get data-datasiswa from api
-                axios.get('http://localhost:8000/api/nilai')
+                axios.get('/api/nilai')
                 .then((result) => {
                     datasiswa.value = result.data
                 }).catch((err) => {
@@ -98,7 +98,7 @@ export default {
 
          function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/nilai/${id}`
+                `/api/nilai/${id}`
             )
             .then(() => {
                 datasiswa.value.data.splice(index,1)

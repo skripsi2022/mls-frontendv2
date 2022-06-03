@@ -91,7 +91,7 @@ export default {
         const route = useRoute();
 
         onMounted(() => {
-            axios.get(`http://localhost:8000/api/guru/${route.params.id}`)
+            axios.get(`/api/guru/${route.params.id}`)
             .then((result) => {
                 guru.nama_guru = result.data.data.nama_guru,
                 guru.notelp_guru = result.data.data.notelp_guru,
@@ -104,7 +104,7 @@ export default {
 
         function update() {
             axios.put(
-                `http://localhost:8000/api/guru/${route.params.id}`,
+                `/api/guru/${route.params.id}`,
                 guru
             )
              .then(() => {

@@ -1,4 +1,5 @@
 <template>
+ 
   <div class="side-nav vertical-menu nav-menu-light scrollable">
                 <div class="nav-logo">
                     <div class="w-100 logo">
@@ -9,7 +10,7 @@
                     </div>
                  </div>
                  <br>
-                 <ul class="nav-menu">
+                 <ul class="nav-menu" v-if="!role">
                      <li class="nav-group-title">Menu Utama</li>
                     <li class="nav-menu-item router-link-active">
                         <router-link :to="{name: 'dashboard.index'}">
@@ -56,8 +57,60 @@
                         </router-link>
                     </li>
                 </ul>
+                
+                
+                 <ul class="nav-menu" v-if="role">
+                     <li class="nav-group-title">Menu Utama</li>
+                    <li class="nav-menu-item router-link-active">
+                        <router-link :to="{name: 'dashboard.index'}">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Dashboard</span>
+                        </router-link>
+                    </li>
+                    <li class="nav-menu-item">
+                        <router-link :to="{name : 'guru.mapel.index'}">
+                            <i class="icon-book-open feather"></i>
+                            <span class="nav-menu-item-title">Mata Pelajaran</span>
+                        </router-link>
+                    </li>``                    
+                </ul>                
             </div>
 </template>
+
+<script>
+export default {
+  data() {
+      return {
+        user: null,
+        isLoggedIn: false,
+        role: true
+      }
+    },
+    mounted() {
+      this.setUser()
+    },
+    methods: {
+      setUser() {
+          this.user = JSON.parse(localStorage.getItem('user'))
+          this.isLoggedIn = localStorage.getItem('token') != null
+
+          let role = localStorage.getItem('role')
+
+          if(role === 'Admin'){
+              this.role = false
+          }
+        },
+        logout() {
+          localStorage.removeItem('token')
+          localStorage.removeItem('user')
+          this.setUser()
+
+          this.$router.push('/')
+        }
+    }
+}
+</script>
+
 
 
 

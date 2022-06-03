@@ -91,7 +91,7 @@ export default {
 
         onMounted(() => {
             //get siswa from api
-            axios.get('http://localhost:8000/api/siswa')
+            axios.get('/api/siswa')
             .then((result) => {
                 siswa.value = result.data
             }).catch((err) => {
@@ -101,7 +101,7 @@ export default {
 
          function destroy(id,index){
             axios.delete(
-                `http://localhost:8000/api/siswa/${id}`
+                `/api/siswa/${id}`
             )
             .then(() => {
                 siswa.value.data.splice(index,1)
