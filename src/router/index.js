@@ -20,7 +20,6 @@ import UjianView from '../views/Dashboard/Ujian/IndexView.vue'
 import UjianCreateView from '../views/Dashboard/Ujian/CreateView.vue'
 import UjianDetailView from '../views/Dashboard/Ujian/DetailView.vue'
 import SoalView from '../views/Dashboard/Soal/IndexView.vue'
-import SoalCreateView from '../views/Dashboard/Soal/CreateView.vue'
 import SoalDetailView from '../views/Dashboard/Soal/DetailView.vue'
 import NilaiView from '../views/Dashboard/Nilai/IndexView.vue'
 import NilaiCreateView from '../views/Dashboard/Nilai/CreateView.vue'
@@ -28,6 +27,13 @@ import NilaiDetailView from '../views/Dashboard/Nilai/DetailView.vue'
 
 // GURU AREA =================================================
 import MapelGuruView from '../views/Guru/Mapel/IndexView.vue'
+import AddMapelGuruView from '../views/Guru/Mapel/CreateView.vue'
+import DetailMapelGuruView from '../views/Guru/Mapel/DetailView.vue'
+import GuruUjianView from '../views/Guru/Ujian/IndexView.vue'
+import GuruUjianCreateView from '../views/Guru/Ujian/CreateView.vue'
+import GuruUjianDetailView from '../views/Guru/Ujian/DetailView.vue'
+import GuruSoalView from '../views/Guru/Soal/IndexView.vue'
+import GuruSoalDetailView from '../views/Guru/Soal/DetailView.vue'
 
 
 
@@ -226,14 +232,6 @@ const routes = [
     },
   },
   {
-    path: '/soal/create',
-    name: 'soal.create',
-    component: SoalCreateView,
-    meta:{
-      title : "Soal | Learning System Cloud Based",
-    },
-  },
-  {
     path: '/soal/detail',
     name: 'soal.detail',
     component: SoalDetailView,
@@ -258,7 +256,63 @@ const routes = [
       meta:{
         title : "Mata Pelajaran | Learning System Cloud Based",
       },
-   }
+   },
+   {
+     path: '/guru/mapel/create',
+      name: 'guru.mapel.create',
+      component: AddMapelGuruView,
+      meta:{
+        title : "Tambah Mata Pelajaran | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/mapel/detail',
+      name: 'guru.mapel.detail',
+      component: DetailMapelGuruView,
+      meta:{
+        title : "Detail Mata Pelajaran | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/ujian',
+      name: 'guru.ujian.index',
+      component: GuruUjianView,
+      meta:{
+        title : "Ujian | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/ujian/create',
+      name: 'guru.ujian.create',
+      component: GuruUjianCreateView,
+      meta:{
+        title : "Tambah Ujian | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/ujian/detail',
+      name: 'guru.ujian.detail',
+      component: GuruUjianDetailView,
+      meta:{
+        title : "Detail Ujian | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/soal',
+      name: 'guru.soal.index',
+      component: GuruSoalView,
+      meta:{
+        title : "Soal Ujian | Learning System Cloud Based",
+      },
+   },
+   {
+     path: '/guru/soal/detail',
+      name: 'guru.soal.detail',
+      component: GuruSoalDetailView,
+      meta:{
+        title : "Detail Soal Ujian | Learning System Cloud Based",
+      },
+   },
 ]
 
 const router = createRouter({

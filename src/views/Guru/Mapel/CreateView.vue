@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-lg-4">
                              <div class="d-grid d-md-flex justify-content-md-end">
-                                <router-link :to="{name: 'mapel.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
+                                <router-link :to="{name: 'guru.mapel.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
                              </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                                         {{Validation.nama_mapel[0]}}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <label for="" class="form-label">Guru</label>
                                     <select name="guru" class="form-select" v-model="mapel.guru_id">
                                         <option v-for="(guru, index) in guru.data" :key="index" :value="guru.id_guru">{{guru.nama_guru}}</option>
@@ -40,9 +40,9 @@
                                     <div v-if="Validation.guru_id" class="text-danger">
                                         {{Validation.guru_id[0]}}
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-12">
-                                    <button class="btn btn-primary" type="submit">Tambah</button>
+                                    <button class="btn btn-primary" type="submit" >Tambah</button>
                                 </div>
                             </form>  
                         </div>
@@ -59,16 +59,37 @@
 </template>
 
 <script>
-import {reactive ,ref,onMounted} from 'vue'
+import {reactive ,ref} from 'vue'
 import { useRouter} from 'vue-router'
 import axios from 'axios'
 
 export default {
+
+    methods: {
+        showAlert() {
+            // Use sweetalert2
+            this.$swal({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$swal('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    this.$swal('Changes are not saved', '', 'info')
+                }
+            });
+        },
+    },
+
     setup(){
+        let id = localStorage.id;
         //data binding
         const mapel = reactive({
             nama_mapel: '',
-            guru_id: '',
+            id: id,
         });
 
         const Validation = ref([]);
@@ -76,34 +97,23 @@ export default {
         const router = useRouter();
 
         function store() {
+            // console.log(mapel)
             axios.post(
-                '/api/mapel',
+                '/api/addMapelGuru',
                 mapel
             )
              .then(() => {
                 router.push({
-                    name : 'mapel.index'
+                    name : 'guru.mapel.index'
                 })
+                
             }).catch((err) => {
                 Validation.value = err.response.data
             });
         }
 
-        let guru = ref([]);
-
-        onMounted(() => {
-            //get siswa from api
-            axios.get('/api/guru')
-            .then((result) => {
-                guru.value = result.data
-            }).catch((err) => {
-                console.log(err.response)
-            });
-        });
-
         return {
             mapel,
-            guru,
             Validation,
             router,
             store

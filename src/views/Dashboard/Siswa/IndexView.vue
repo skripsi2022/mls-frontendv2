@@ -45,6 +45,7 @@
                                 <table id="data-table" class="table data-table">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Nama</th>
                                             <th>NIS</th>
                                             <th>Kelas</th>
@@ -54,6 +55,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(siswa, index) in siswa.data" :key="index">
+                                            <td>{{++index}}</td>
                                             <td>{{siswa.nama_siswa}}</td>
                                             <td>{{siswa.nis_siswa}}</td>
                                             <td>{{siswa.kelas.nama_kelas}}</td>
@@ -105,6 +107,7 @@ export default {
             )
             .then(() => {
                 siswa.value.data.splice(index,1)
+                window.location.reload();
             }).catch((err) => {
                 console.log(err.response.data);
             });

@@ -27,7 +27,7 @@
                                     <div class="avatar avatar-circle avatar-image" style="width: 35px; height: 35px; line-height: 35px;">
                                         <img src="assets/images/avatars/thumb-2.jpg" alt="">
                                     </div>
-                                    <span class="fw-bold mx-1">{{ user.name }}</span>
+                                    <span class="fw-bold mx-1">{{ name }}</span>
                                     <i class="feather icon-chevron-down"></i>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-end">
@@ -37,7 +37,7 @@
                                                 <img src="assets/images/avatars/thumb-2.jpg" alt="">
                                             </div>
                                             <div class="d-flex flex-column ms-1">
-                                                <span class="fw-bold text-dark">{{ user.name }}</span>
+                                                <span class="fw-bold text-dark">{{ name }}</span>
                                                 <span class="font-size-sm">{{ user.email }}</span>
                                             </div>
                                        </div>
@@ -79,18 +79,14 @@ export default {
             loggedIn: localStorage.getItem('loggedIn'),
             //state token
             token: localStorage.getItem('token'),
+
+            name: localStorage.getItem('name'),
             //state user logged In
             user: []
         }
     },
 
-    created() {
-        axios.get('/api/user', {headers: {'Authorization': 'Bearer '+this.token}})
-        .then(response => {
-            console.log(response)
-            this.user = response.data // assign response to state user
-        })
-    },
+   
 
     methods: {
         logout() {

@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-lg-4">
                              <div class="d-grid d-md-flex justify-content-md-end">
-                                <router-link :to="{name: 'ujian.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
+                                <router-link :to="{name: 'guru.ujian.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
                              </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ export default {
             )
              .then(() => {
                 router.push({
-                    name : 'ujian.index'
+                    name : 'guru.ujian.index'
                 })
             }).catch((err) => {
                 Validation.value = err.response.data
@@ -103,7 +103,11 @@ export default {
 
         onMounted(() => {
             //get mapel from api
-            axios.get('/api/mapel')
+            axios.get('/api/mapelGuru',{
+                params: {
+                    id: localStorage.getItem('id')
+                }
+            })
             .then((result) => {
                 mapel.value = result.data
             }).catch((err) => {

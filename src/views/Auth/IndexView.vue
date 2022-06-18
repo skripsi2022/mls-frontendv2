@@ -115,6 +115,8 @@
                                     //set localStorage User
                                     localStorage.setItem('user', JSON.stringify(res.data.user))
 
+                                    localStorage.setItem('name', res.data.user.name)
+
                                     //set localStorage
                                     localStorage.setItem("loggedIn", "true")
 
@@ -127,8 +129,6 @@
                                     //set localStorage Role
                                     localStorage.setItem("role", res.data.role)
                                     
-            
-
                                     //change state
                                     this.loggedIn = true
 

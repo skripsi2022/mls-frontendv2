@@ -63,12 +63,14 @@
                                 <table id="data-table" class="table data-table">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Nama</th>                                           
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(jurusan, index) in jurusan.data" :key="index"> 
+                                        <tr v-for="(jurusan, index) in jurusan.data" :key="index">
+                                            <td>{{++index}}</td> 
                                             <td>{{jurusan.nama_jurusan}}</td>
                                             <td>
                                                 <router-link :to="{name: 'jurusan.detail',params:{id:jurusan.id_jurusan}}" class="btn btn-info btn-sm">Detail</router-link>
@@ -87,13 +89,15 @@
                                 <table id="data-table" class="table data-table">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Kelas</th>                                           
                                             <th>Jurusan</th>                                           
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(kelas, index) in kelas.data" :key="index"> 
+                                        <tr v-for="(kelas, index) in kelas.data" :key="index">
+                                            <td>{{++index}}</td> 
                                             <td>{{kelas.nama_kelas}}</td>
                                             <td>{{kelas.jurusan.nama_jurusan}}</td>
                                             <td>
@@ -108,7 +112,7 @@
                     </div>
                 </div>
                 <!-- Footer START -->
-                <div class="footer fixed-bottom">
+                <!-- <div class="footer fixed-bottom">
                     <div class="footer-content">
                         <p class="mb-0">Copyright © 2022  All rights reserved.</p>
                         <span>
@@ -116,7 +120,7 @@
                             <a href="" class="text-gray">Privacy &amp; Policy</a>
                         </span>
                     </div>
-                </div>
+                </div> -->
                 <!-- Footer End -->
             </div>
 </template>
@@ -145,7 +149,7 @@ export default {
 
         onMounted(() => {
             //get kelas from api
-            axios.get('/api/kelas/')
+            axios.get('/api/kelas')
             .then((result) => {
                 kelas.value = result.data
             }).catch((err) => {
@@ -159,6 +163,7 @@ export default {
             )
             .then(() => {
                 jurusan.value.data.splice(index,1)
+                window.location.reload();
             }).catch((err) => {
                 console.log(err.response.data);
             });
@@ -170,6 +175,7 @@ export default {
             )
             .then(() => {
                 kelas.value.data.splice(index,1)
+                window.location.reload();
             }).catch((err) => {
                 console.log(err.response.data);
             });

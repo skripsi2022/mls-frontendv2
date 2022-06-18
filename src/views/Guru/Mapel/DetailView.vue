@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-lg-4">
                              <div class="d-grid d-md-flex justify-content-md-end">
-                                <router-link :to="{name: 'mapel.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
+                                <router-link :to="{name: 'guru.mapel.index'}" class="btn btn-warning me-md-end" type="button"><i class="icon-arrow-left-circle feather"></i>Kembali</router-link>
                              </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                 </div>
                                  <div class="col-md-4">
                                     <label for="" class="form-label">Guru</label>
-                                    <select name="guru" class="form-select" v-model="mapel.guru_id">
+                                    <select name="guru" class="form-select" v-model="mapel.guru_id" disabled="">
                                         <option v-for="(guru, index) in guru.data" :key="index" :value="guru.id_guru">{{guru.nama_guru}}</option>
                                     </select>
                                     <div v-if="Validation.guru_id" class="text-danger">
@@ -106,7 +106,7 @@ export default {
             )
              .then(() => {
                 router.push({
-                    name : 'mapel.index'
+                    name : 'guru.mapel.index'
                 })
             }).catch((err) => {
                 Validation.value = err.response.data

@@ -1,14 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-// import Vue from 'vue'
+
+
+// Sweet Alert
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 import axios from 'axios'
 
-// Vue.prototype.$http=axios
+// axios.defaults.baseURL='http://192.168.0.100/'
+// axios.defaults.baseURL='http://localhost:8000/'
+axios.defaults.baseURL='https://api.cloudlearning.my.id/'
 
-axios.defaults.baseURL='http://localhost:8000/'
 
-
-
-createApp(App).use(router).use(router).mount('#app')
+createApp(App).use(router).use(VueSweetalert2).mount('#app')

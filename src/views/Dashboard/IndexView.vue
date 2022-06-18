@@ -11,7 +11,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Selamat Datang, {{ user.name }} </h4>
+                            <h4 class="card-title">Selamat Datang, {{ name }} </h4>
                         </div>
                         <div class="card-body">
                             
@@ -41,18 +41,14 @@ export default {
             loggedIn: localStorage.getItem('loggedIn'),
             //state token
             token: localStorage.getItem('token'),
+
+            name: localStorage.getItem('name'),
             //state user logged In
             user: []
         }
     },
 
-    created() {
-        axios.get('api/user', {headers: {'Authorization': 'Bearer '+this.token}})
-        .then(response => {
-            console.log(response)
-            this.user = response.data // assign response to state user
-        })
-    },
+    
 
     methods: {
         logout() {
