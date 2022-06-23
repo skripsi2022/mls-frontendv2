@@ -61,31 +61,27 @@
                             </form>  
                         </div>                         
                     </div>
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body">
                             <h4>Daftar Nilai <span class="lead">{{siswa.nama_siswa}}</span></h4>
                             <div class="mt-4">
                                 <table id="data-table" class="table data-table">
                                     <thead>
                                         <tr>
-                                            <th>Mata Pelajaran</th>
+                                            <th>Ujian</th>
                                             <th>Nilai</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(nilaisiswa, index) in nilaisiswa.data" :key="index">
                                             <td>{{nilaisiswa.nama_mapel}}</td>
-                                            <td>{{nilaisiswa.nilai}}</td>
-                                            <!-- <td>
-                                                <router-link :to="{name: 'siswa.detail',params:{id:siswa.id_siswa}}" class="btn btn-info btn-sm">Detail</router-link>
-                                                <button class="btn btn-danger btn-sm" @click.prevent="destroy(siswa.id_siswa, index)">Delete</button>
-                                            </td> -->
+                                            <td>{{nilaisiswa.nilai}}</td>                                            
                                         </tr>                                                                                                 
                                     </tbody>                                   
                                 </table>
                             </div>
                         </div>
-                    </div>                    
+                    </div>                     -->
                 </div>
                 <!-- Footer START -->
                 <div class="footer fixed-bottom ">
@@ -129,18 +125,6 @@ export default {
             });
         });
 
-        let nilaisiswa = ref([]);
-
-        onMounted(() => {
-            //get data-nilaisiswa from api
-            axios.get(`/api/nilai/${route.params.id}`)
-            .then((result) => {
-                nilaisiswa.value = result.data
-            }).catch((err) => {
-                console.log(err.response)
-            });
-        });
-
 
         let kelas = ref([]);
 
@@ -170,7 +154,6 @@ export default {
 
         return {
             siswa,
-            nilaisiswa,
             kelas,
             Validation,
             router,

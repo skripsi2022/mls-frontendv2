@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card">
-                        <div class="card-body" style="position: relative;">
+                        <!-- <div class="card-body" style="position: relative;">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
                                     <h3>4 Mapel</h3>
@@ -25,7 +25,7 @@
                                 <div class="expand-trigger">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- <div class="col-lg-3">

@@ -12,7 +12,8 @@
         <br>
         <ul class="nav-menu" v-if="!role">
             <li class="nav-group-title">Menu Utama</li>
-            <li class="nav-menu-item router-link-active">
+            <!-- <li class="nav-menu-item router-link-active"> -->
+            <li class="nav-menu-item">
                 <router-link :to="{name: 'dashboard.index'}">
                     <i class="feather icon-home"></i>
                     <span class="nav-menu-item-title">Dashboard</span>
@@ -61,7 +62,7 @@
 
         <ul class="nav-menu" v-if="role">
             <li class="nav-group-title">Menu Utama</li>
-            <li class="nav-menu-item router-link-active">
+            <li class="nav-menu-item">
                 <router-link :to="{name: 'dashboard.index'}">
                     <i class="feather icon-home"></i>
                     <span class="nav-menu-item-title">Dashboard</span>
@@ -79,6 +80,12 @@
                     <span class="nav-menu-item-title">Ujian</span>
                 </router-link>
             </li>
+            <!-- <li class="nav-menu-item">
+                <router-link :to="{name: 'guru.nilai.index'}">
+                    <i class="icon-book feather"></i>
+                    <span class="nav-menu-item-title">Nilai</span>
+                </router-link>
+            </li> -->
         </ul>
     </div>
 </template>

@@ -32,12 +32,12 @@
                                     <div class="mb-3">
                                         <label class="form-label d-flex justify-content-between">
                                             <span>Password</span>
-                                            <a href="" class="text-primary font">Forget Password?</a>
+                                            <!-- <a href="" class="text-primary font">Forget Password?</a> -->
                                         </label>
                                         <div class="form-group input-affix flex-column">
                                             <label class="d-none">Password</label>
                                             <input formcontrolname="password" class="form-control" type="password" v-model="user.password">
-                                            <i class="suffix-icon feather cursor-pointer text-dark icon-eye" ng-reflect-ng-class="icon-eye"></i>
+                                            <!-- <i class="suffix-icon feather cursor-pointer text-dark icon-eye" ng-reflect-ng-class="icon-eye"></i> -->
                                         </div>
                                          <div v-if="validation.password" class="text-danger">
                                             Masukkan Password !

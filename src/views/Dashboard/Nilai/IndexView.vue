@@ -11,30 +11,29 @@
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body" style="position: relative;">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
                                     <h3>$168.90</h3>
                                     <span class="text-muted fw-semibold">Total Nilai</span>
-                                </div>
-                                <!-- <div class="text-success fw-bold font-size-lg">+18%</div> -->
+                                </div>                              
                             </div>
                             <div class="resize-triggers">
                                 <div class="expand-trigger">
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> -->
                 </div>
                 <div class="col-lg-9">
                     <div class="">
-                        <div class="card-body" style="position: relative;">
+                        <!-- <div class="card-body" style="position: relative;">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <router-link :to="{name :'nilai.create'}" class="btn btn-primary me-md-end"
                                     type="button"><i class="icon-plus-circle feather"></i>Tambah</router-link>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -50,6 +49,7 @@
                                     <th>Nama</th>
                                     <th>Mata Pelajaran</th>
                                     <th>Nilai</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,10 +58,10 @@
                                     <td>{{datasiswa.siswa.nama_siswa}}</td>
                                     <td>{{datasiswa.ujian.nama_ujian}}</td>
                                     <td>{{datasiswa.nilai}}</td>
-                                    <!-- <td>
-                                                <router-link :to="{name: 'siswa.detail',params:{id:siswa.id_siswa}}" class="btn btn-info btn-sm">Detail</router-link>
-                                                <button class="btn btn-danger btn-sm" @click.prevent="destroy(siswa.id_siswa, index)">Delete</button>
-                                            </td> -->
+                                    <td>
+                                        <button class="btn btn-danger btn-sm"
+                                            @click.prevent="destroy(datasiswa.id_nilai, index)">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -105,6 +105,7 @@ export default {
             )
             .then(() => {
                 datasiswa.value.data.splice(index,1)
+                window.location.reload();
             }).catch((err) => {
                 console.log(err.response.data);
             });

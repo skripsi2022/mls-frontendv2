@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body" style="position: relative;">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-9">
                     <div class="">
@@ -34,7 +34,7 @@
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <router-link :to="{name: 'guru.mapel.create'}" class="btn btn-primary me-md-end"
                                     type="button"><i class="icon-plus-circle feather"></i>Tambah</router-link>
-                                <button class="btn btn-danger me-md-end" @click="showAlert">Test</button>
+                                <!-- <button class="btn btn-danger me-md-end" @click="showAlert">Test</button> -->
                             </div>
                         </div>
                     </div>

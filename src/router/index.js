@@ -34,6 +34,7 @@ import GuruUjianCreateView from '../views/Guru/Ujian/CreateView.vue'
 import GuruUjianDetailView from '../views/Guru/Ujian/DetailView.vue'
 import GuruSoalView from '../views/Guru/Soal/IndexView.vue'
 import GuruSoalDetailView from '../views/Guru/Soal/DetailView.vue'
+import GuruNilaiView from '../views/Guru/Nilai/IndexView.vue'
 
 
 
@@ -313,6 +314,14 @@ const routes = [
         title : "Detail Soal Ujian | Learning System Cloud Based",
       },
    },
+   {
+     path: '/guru/nilai',
+      name: 'guru.nilai.index',
+      component: GuruNilaiView,
+      meta:{
+        title : "Nilai  Ujian | Learning System Cloud Based",
+      },
+   }
 ]
 
 const router = createRouter({
