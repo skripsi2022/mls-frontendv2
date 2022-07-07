@@ -74,6 +74,7 @@
 import {reactive ,ref} from 'vue'
 import { useRouter} from 'vue-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
     setup(){
@@ -95,10 +96,24 @@ export default {
                 guru
             )
              .then(() => {
+                 Swal.fire({
+                     title: 'Berhasil!',
+                     text: 'Guru Berhasil ditambahkan',
+                     icon: 'success',
+                     confirmButtonText: 'Lanjut !'
+                 }
+                 )
                 router.push({
                     name : 'guru.index'
                 })
             }).catch((err) => {
+                Swal.fire({
+                    title: 'Gagal !',
+                    text: 'Pastikan Data Lengkap yaa !',
+                    icon: 'warning',
+                    confirmButtonText: 'Lanjut !'
+                }
+                )
                 Validation.value = err.response.data
             });
         }

@@ -11,21 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card">
-                        <!-- <div class="card-body" style="position: relative;">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3>$168.90</h3>
-                                    <span class="text-muted fw-semibold">This Month</span>
-                                </div>
-                                <div class="text-success fw-bold font-size-lg">+18%</div>
-                            </div>
-                            <div class="resize-triggers">
-                                <div class="expand-trigger">
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
+                   
                 </div>
                 <div class="col-lg-9">
                     <div class="">
@@ -88,6 +74,7 @@
 
 import axios from 'axios'
 import {onMounted, ref} from 'vue'
+import Swal from 'sweetalert2'
 
 export default {
     // 
@@ -104,16 +91,43 @@ export default {
             });
         });
 
-         function destroy(id,index){
-            axios.delete(
-                `/api/guru/${id}`
-            )
-            .then(() => {
-                guru.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
+         async function destroy(id,index){
+             Swal.fire({
+                 title: 'Hapus Data Guru',
+                 text: "Yakin dihapus ?",
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Hapus !'
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                     axios.delete(
+                         `/api/guru/${id}`
+                     )
+                         .then(() => {
+                             guru.value.data.splice(index, 1)
+                             Swal.fire({
+                                 title: 'Berhasil!',
+                                 text: 'Guru Berhasil dihapus',
+                                 icon: 'success',
+                                 confirmButtonText: 'Lanjut !'
+                             }
+                             )
+                              window.location.reload();
+                         }).catch((err) => {
+                             console.log(err.response.data);
+                             Swal.fire({
+                                 title: 'Gagal!',
+                                 text: 'Guru memiliki relasi dengan tabel lain !',
+                                 icon: 'error',
+                                 confirmButtonText: 'Lanjut !'
+                             }
+                             )
+                         });
+
+                 }
+             })
         } 
 
         return {

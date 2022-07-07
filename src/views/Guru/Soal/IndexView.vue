@@ -248,14 +248,14 @@ export default {
         let soal = ref([]);
 
         onMounted(() => {
-            //get mapel from api
+            //get soal by ujian from api
             axios.get(`/api/getSoalByUjian/${route.params.id}`)
                 .then((result) => {
                     soal.value = result.data
                 }).catch((err) => {
                     console.log(err.response)
                 });
-        });
+            });
 
 
         async function store() {

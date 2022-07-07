@@ -69,17 +69,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Footer START -->
-                <div class="footer fixed-bottom">
-                    <div class="footer-content">
-                        <p class="mb-0">Copyright © 2022.</p>
-                        <span>
-                            <a href="" class="text-gray me-3">Term &amp; Conditions</a>
-                            <a href="" class="text-gray">Privacy &amp; Policy</a>
-                        </span>
-                    </div>
-                </div>
-                <!-- Footer End -->
             </div>
 </template>
 
@@ -143,7 +132,7 @@ export default {
             )
              .then(() => {
                 router.push({
-                    name : 'kelas.index'
+                    name : 'jurusan.index'
                 })
             }).catch((err) => {
                 Validation.value = err.response.data

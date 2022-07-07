@@ -61,7 +61,12 @@
                                     <td>{{nilaisiswa.nilai}}</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm"
-                                            @click.prevent="destroy(nilaisiswa.id_nilai, index)">Delete</button>
+                                            @click.prevent="destroy(nilaisiswa.id_nilai, index)">Delete
+                                        </button>
+                                        <router-link
+                                            :to="{ name: 'guru.nilai.detail', params: { id: nilaisiswa.id_nilai}}"
+                                            class="btn btn-info btn-sm">Detail
+                                        </router-link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -85,6 +90,7 @@
 import axios from 'axios'
 import {onMounted, ref} from 'vue'
 import { useRoute} from 'vue-router'
+import Swal from 'sweetalert2'
 
 
 export default {
@@ -105,17 +111,45 @@ export default {
                 });
             });
 
-         function destroy(id,index){
-            axios.delete(
-                `/api/nilai/${id}`
-            )
-            .then(() => {
-                nilaisiswa.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
-        } 
+        async function destroy(id, index) {
+            Swal.fire({
+                title: 'Hapus Data Nilai',
+                text: "Yakin dihapus ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(
+                        `/api/nilai/${id}`
+                    )
+                        .then(() => {
+                            nilaisiswa.value.data.splice(index, 1)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Nilai Berhasil dihapus',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                            //  window.location.reload();
+                        }).catch((err) => {
+                            console.log(err.response.data);
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Nilai memiliki relasi dengan tabel lain !',
+                                icon: 'error',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                        });
+
+                }
+            })
+
+        }
 
         return {
             nilaisiswa,destroy

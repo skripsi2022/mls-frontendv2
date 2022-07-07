@@ -41,9 +41,15 @@
                                     type="button" role="tab" aria-controls="daftar" aria-selected="false">Daftar
                                     Soal</button>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="import-tab" data-bs-toggle="tab" data-bs-target="#import"
+                                    type="button" role="tab" aria-controls="import" aria-selected="false">Import
+                                    Soal</button>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                            <div class="tab-pane fade show active" id="detail" role="tabpanel"
+                                aria-labelledby="detail-tab">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4>Detail Ujian</h4>
@@ -179,6 +185,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="import" role="tabpanel" aria-labelledby="import-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4>Import Soal</h4>
+                                        <div class="mt-4">
+                                            <!-- <form form class="row g-3" @submit.prevent="importExcel()"> -->
+                                            <form form class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="" class="form-label">File Excel/Csv</label>
+                                                    <input type="file" class="form-control" @change="upload">
+                                                </div>
+                                                <div class="col-12">
+                                                    <button class="btn btn-primary" @click="submit">Upload</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,9 +219,48 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 export default {
-  
+    
+    methods:{
+
+        upload(e){
+            
+            let files = e.target.files[0]
+            this.csv = files
+        },
+        submit(){
+            // console.log(this.csv)
+            let formData = new FormData()
+            formData.append('csv',this.csv) 
+
+            axios.post("/api/importSoal",formData)
+            .then(response => {
+                console.log(response)
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Data Soal Berhasil diimport !',
+                    icon: 'success',
+                    confirmButtonText: 'Lanjut !'
+                })
+                this.$router.push({
+                    name: 'ujian.index',
+                })
+            }).catch((err) => {
+                console.log(err.response)
+                Swal.fire({
+                    title: 'Data Soal Gagal diimport !',
+                    text: 'coba cek lagi yaaa :( ',
+                    icon: 'error',
+                    confirmButtonText: 'Ulangi !'
+                })
+            });
+        }
+    },
     setup(){
-       
+        // file binding import
+       const file = reactive({
+            file:''
+       });
+
         //data binding
         const ujian = reactive({
             nama_ujian: '',
@@ -205,7 +269,6 @@ export default {
             kelas: '',
         });
 
-        
         const Validation = ref([]);
 
         const router = useRouter();
@@ -256,7 +319,13 @@ export default {
             });
         });
 
-
+        async function importExcel(){
+            // axios.post(
+            //     '/api/importSoal',
+            //     file
+            // )
+            console.log(file)
+        }
         async function store() {
             
             axios.post(
@@ -332,6 +401,7 @@ export default {
             soal,
             back,
             store,destroy,
+            importExcel,
             addsoal,
             Validation,
             router,

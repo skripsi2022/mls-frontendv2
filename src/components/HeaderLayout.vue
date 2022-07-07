@@ -25,7 +25,7 @@
                             <div class="dropdown header-nav-item-select nav-profile" >
                                 <div class="toggle-wrapper" id="nav-profile-dropdown" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-circle avatar-image" style="width: 35px; height: 35px; line-height: 35px;">
-                                        <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                        <img src="assets/images/avatars/user.png" alt="">
                                     </div>
                                     <span class="fw-bold mx-1">{{ name }}</span>
                                     <i class="feather icon-chevron-down"></i>
@@ -34,7 +34,7 @@
                                     <div class="nav-profile-header">
                                        <div class="d-flex align-items-center">
                                             <div class="avatar avatar-circle avatar-image">
-                                                <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                <img src="assets/images/avatars/user.png" alt="">
                                             </div>
                                             <div class="d-flex flex-column ms-1">
                                                 <span class="fw-bold text-dark">{{ name }}</span>
@@ -42,12 +42,6 @@
                                             </div>
                                        </div>
                                     </div>
-                                    <a href="javascript:void(0)" class="dropdown-item">
-                                       <div class="d-flex align-items-center">
-                                           <i class="font-size-lg me-2 feather icon-user"></i>
-                                           <span>Profile</span>
-                                        </div>
-                                    </a>
                                     <a href="javascript:void(0)" class="dropdown-item">
                                        <div class="d-flex align-items-center">
                                            <i class="font-size-lg me-2 feather icon-settings"></i>
@@ -69,6 +63,7 @@
 <script>
 
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
     name: 'dashboard.IndexView',
@@ -90,14 +85,26 @@ export default {
 
     methods: {
         logout() {
-            axios.get('/api/logout')
-            .then(() => {
-                //remove localStorage
-                localStorage.clear(); 
+            Swal.fire({
+                title: 'Yakin Logout ?',
+                text: "huft :( selamat jalan ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="icon-log-out feather"></i> Logout'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.get('/api/logout')
+                        .then(() => {
+                            //remove localStorage
+                            localStorage.clear();
 
-                //redirect
-                return this.$router.push({ name: 'auth.index' })
-            })
+                            //redirect
+                            return this.$router.push({ name: 'auth.index' })
+                        })
+                }
+            })           
         }
     },
 

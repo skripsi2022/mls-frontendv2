@@ -53,14 +53,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(datasiswa, index) in datasiswa.data" :key="index">
+                                <tr v-for="(nilai, index) in nilai.data" :key="index">
                                     <td>{{++index}}</td>
-                                    <td>{{datasiswa.siswa.nama_siswa}}</td>
-                                    <td>{{datasiswa.ujian.nama_ujian}}</td>
-                                    <td>{{datasiswa.nilai}}</td>
+                                    <td>{{nilai.siswa.nama_siswa}}</td>
+                                    <td>{{nilai.ujian.nama_ujian}}</td>
+                                    <td>{{nilai.nilai}}</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm"
-                                            @click.prevent="destroy(datasiswa.id_nilai, index)">Delete</button>
+                                            @click.prevent="destroy(nilai.id_nilai, index)">Delete</button>
+                                        <router-link :to="{ name: 'nilai.detail', params: { id: nilai.id_nilai}}"
+                                            class="btn btn-info btn-sm">Detail</router-link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -83,36 +85,65 @@
 
 import axios from 'axios'
 import {onMounted, ref} from 'vue'
+import Swal from 'sweetalert2'
 
 export default {
     // 
     setup(){
-            let datasiswa = ref([]);
+            let nilai = ref([]);
 
             onMounted(() => {
-                //get data-datasiswa from api
+                //get data-nilai from api
                 axios.get('/api/nilai')
                 .then((result) => {
-                    datasiswa.value = result.data
+                    nilai.value = result.data
                 }).catch((err) => {
                     console.log(err.response)
                 });
             });
 
-         function destroy(id,index){
-            axios.delete(
-                `/api/nilai/${id}`
-            )
-            .then(() => {
-                datasiswa.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
+         async function destroy(id,index){
+             Swal.fire({
+                 title: 'Hapus Data Nilai',
+                 text: "Yakin dihapus ?",
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Hapus !'
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                     axios.delete(
+                         `/api/nilai/${id}`
+                     )
+                         .then(() => {
+                             nilai.value.data.splice(index, 1)
+                             Swal.fire({
+                                 title: 'Berhasil!',
+                                 text: 'Nilai Berhasil dihapus',
+                                 icon: 'success',
+                                 confirmButtonText: 'Lanjut !'
+                             }
+                             )
+                             //  window.location.reload();
+                         }).catch((err) => {
+                             console.log(err.response.data);
+                             Swal.fire({
+                                 title: 'Gagal!',
+                                 text: 'Nilai memiliki relasi dengan tabel lain !',
+                                 icon: 'error',
+                                 confirmButtonText: 'Lanjut !'
+                             }
+                             )
+                         });
+
+                 }
+             })
+           
         } 
 
         return {
-            datasiswa,destroy
+            nilai,destroy
         }
     }
 }

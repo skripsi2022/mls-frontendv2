@@ -10,39 +10,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card">                            
-                                <!-- <div class="card-body" style="position: relative;">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <h3>4 Jurusan</h3>
-                                            <span class="text-muted fw-semibold">Total</span>
-                                        </div>
-                                        <div class="text-danger fw-bold font-size-lg"><i class="la-school la"></i></div>
-                                        </div>
-                                    <div class="resize-triggers">
-                                        <div class="expand-trigger">
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
+                        <div class="col-lg-3">                            
                         </div>
-                        <div class="col-lg-3">
-                            <div class="card">                            
-                                <!-- <div class="card-body" style="position: relative;">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <h3>4 Kelas</h3>
-                                            <span class="text-muted fw-semibold">Total</span>
-                                        </div>
-                                        <div class="text-success fw-bold font-size-lg"><i class="icon-users feather"></i></div>
-                                        </div>
-                                    <div class="resize-triggers">
-                                        <div class="expand-trigger">
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
+                        <div class="col-lg-3">                            
                         </div>
                         <div class="col-lg-6">
                             <div class="">                            
@@ -129,6 +99,7 @@
 
 import axios from 'axios'
 import {onMounted, ref} from 'vue'
+import Swal from 'sweetalert2'
 
 export default {
     // 
@@ -157,28 +128,81 @@ export default {
             });
         });
 
-        function destroy(id,index){
-            axios.delete(
-                `/api/jurusan/${id}`
-            )
-            .then(() => {
-                jurusan.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
+        async function destroy(id,index){
+            Swal.fire({
+                title: 'Hapus Data Jurusan',
+                text: "Yakin dihapus ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(
+                        `/api/jurusan/${id}`
+                    )
+                        .then(() => {
+                            jurusan.value.data.splice(index, 1)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Jurusan Berhasil dihapus',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                             window.location.reload();
+                        }).catch((err) => {
+                            console.log(err.response.data);
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Jurusan memiliki relasi dengan tabel lain !',
+                                icon: 'error',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                        });
+
+                }
+            })
         } 
 
-        function destroyKelas(id,index){
-            axios.delete(
-                `/api/kelas/${id}`
-            )
-            .then(() => {
-                kelas.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
+        async function destroyKelas(id,index){
+            Swal.fire({
+                title: 'Hapus Data Kelas',
+                text: "Yakin dihapus ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(
+                        `/api/kelas/${id}`
+                    )
+                        .then(() => {
+                            kelas.value.data.splice(index, 1)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Kelas Berhasil dihapus',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                             window.location.reload();
+                        }).catch((err) => {
+                            console.log(err.response.data);
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Kelas memiliki relasi dengan tabel lain !',
+                                icon: 'error',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                        });
+                }
+            })           
         } 
 
         return {

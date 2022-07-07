@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="" class="form-label">NIS</label>
-                                    <input type="text" class="form-control" v-model="siswa.nis_siswa">
+                                    <input type="text" class="form-control" v-model="siswa.nis_siswa" disabled="">
                                     <div v-if="Validation.nis_siswa" class="text-danger">
                                         {{Validation.nis_siswa[0]}}
                                     </div>
@@ -97,6 +97,7 @@
 import {reactive ,ref, onMounted} from 'vue'
 import { useRoute, useRouter} from 'vue-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
     setup(){
@@ -144,10 +145,24 @@ export default {
                 siswa
             )
              .then(() => {
+                 Swal.fire({
+                     title: 'Berhasil!',
+                     text: 'Siswa Berhasil Diupdate',
+                     icon: 'success',
+                     confirmButtonText: 'Lanjut !'
+                 }
+                 )
                 router.push({
                     name : 'siswa.index'
                 })
             }).catch((err) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Pastikan data lengkap yaa!',
+                    icon: 'warning',
+                    confirmButtonText: 'Lanjut !'
+                }
+                )
                 Validation.value = err.response.data
             });
         }

@@ -11,22 +11,6 @@
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card">
-                        <!-- <div class="card-body" style="position: relative;">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3>4 Mapel</h3>
-                                    <span class="text-muted fw-semibold">Total</span>
-                                </div>
-                                <div class="text-warning fw-bold font-size-lg"><i class="icon-book-open feather"></i>
-                                </div>
-                            </div>
-                            <div class="resize-triggers">
-                                <div class="expand-trigger">
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
                 </div>
                 <!-- <div class="col-lg-3">
                             <div class="card">                            
@@ -102,6 +86,7 @@
 
 import axios from 'axios'
 import {onMounted, ref} from 'vue'
+import Swal from 'sweetalert2'
 
 export default {
     // 
@@ -119,15 +104,42 @@ export default {
         });
 
         function destroy(id,index){
-            axios.delete(
-                `/api/mapel/${id}`
-            )
-            .then(() => {
-                mapel.value.data.splice(index,1)
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.response.data);
-            });
+            Swal.fire({
+                title: 'Hapus Data Mapel',
+                text: "Yakin dihapus ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(
+                        `/api/mapel/${id}`
+                    )
+                        .then(() => {
+                            mapel.value.data.splice(index, 1)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Mapel Berhasil dihapus',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                             window.location.reload();
+                        }).catch((err) => {
+                            console.log(err.response.data);
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Mapel memiliki relasi dengan tabel lain !',
+                                icon: 'error',
+                                confirmButtonText: 'Lanjut !'
+                            }
+                            )
+                        });
+
+                }
+            })
         } 
 
         return {

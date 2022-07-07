@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label">Email</label>
-                                    <input type="text" class="form-control" v-model="guru.email_guru">
+                                    <input type="text" class="form-control" v-model="guru.email_guru" disabled="">
                                     <div v-if="Validation.email_guru" class="text-danger">
                                         {{Validation.email_guru[0]}}
                                     </div>
@@ -74,6 +74,7 @@
 import {reactive ,ref, onMounted} from 'vue'
 import { useRoute, useRouter} from 'vue-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
     setup(){
@@ -108,10 +109,24 @@ export default {
                 guru
             )
              .then(() => {
+                 Swal.fire({
+                     title: 'Berhasil!',
+                     text: 'Guru Berhasil diupdate',
+                     icon: 'success',
+                     confirmButtonText: 'Lanjut !'
+                 }
+                 )
                 router.push({
                     name : 'guru.index'
                 })
             }).catch((err) => {
+                Swal.fire({
+                    title: 'Gagal !',
+                    text: 'Guru Gagal diupdate, Pastikan data lengkap !',
+                    icon: 'warning',
+                    confirmButtonText: 'Lanjut !'
+                }
+                )
                 Validation.value = err.response.data
             });
         }

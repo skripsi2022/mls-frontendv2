@@ -99,18 +99,14 @@
                 if (this.user.email && this.user.password) {
                     axios.get('/sanctum/csrf-cookie')
                         .then(response => {
-
                             //debug cookie
                             console.log(response)
-
                             axios.post('/api/login', {
                                 email: this.user.email,
                                 password: this.user.password
                             }).then(res => {
-
                                 //debug user login
                                 console.log(res)
-
                                 if (res.data.success) {
                                     //set localStorage User
                                     localStorage.setItem('user', JSON.stringify(res.data.user))
@@ -146,7 +142,6 @@
                                     //set state login failed
                                     this.loginFailed = true
                                 }
-
                             }).catch(error => {
                                 this.loginFailed = true
                                 console.log(error)
