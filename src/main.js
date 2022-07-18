@@ -11,9 +11,9 @@ import axios from 'axios'
 
 
 // LINK URL
-// axios.defaults.baseURL='http://192.168.0.100/'
+axios.defaults.baseURL='http://192.168.0.100/'
 // axios.defaults.baseURL='https://mls-api.loca.lt/'
-axios.defaults.baseURL='http://localhost:8000/'
+// axios.defaults.baseURL='http://localhost:8000/'
 // axios.defaults.baseURL='https://api.cloudlearning.my.id'
 
 

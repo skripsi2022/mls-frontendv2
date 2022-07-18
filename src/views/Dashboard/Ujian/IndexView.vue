@@ -111,10 +111,11 @@ export default {
 
         onMounted(() => {
             //get ujian from api
-               console.log("ujian id : " + localStorage.ujian_id)
+            console.log("ujian id : " + localStorage.ujian_id)
             axios.get('/api/ujian')
             .then((result) => {
                 ujian.value = result.data
+                console.log(result)
 
             }).catch((err) => {
                 console.log(err.response)
